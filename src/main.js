@@ -36,8 +36,9 @@ class App {
 	}
 
 	renderCards(data) {
-		console.log(data);
-		console.log(this.cardNums);
+		document.getElementById("less").disabled = this.lessButtonState === "inactive";
+		document.getElementById("more").disabled = this.moreButtonState === "inactive";
+
 		let cards = this.cardNums;
 		let parentContainer = document.getElementById('content');
 		parentContainer.innerHTML = '';
@@ -45,8 +46,6 @@ class App {
 		if (document.getElementsByClassName('card').length < this.cardNums.length) {
 			for (let i = 0; i < this.cardNums.length; i++) {
 				let div = document.createElement('div');
-
-				console.log(data[cards[i]]['name']);
 
 				div.innerHTML = `
 				<div class="card">
@@ -72,7 +71,6 @@ class App {
 				parentContainer.appendChild(div);
 			}
 		}
-
 	}
 
 	handleClickMore() {
@@ -81,7 +79,7 @@ class App {
 		this.cardNums.push(lastCard + 1);
 		this.cardNums.shift();
 
-		if (lastCard === this.data.length - 1) {
+		if (lastCard === this.data.length - 2) {
 			let button = document.getElementById("more");
 			button.classList.remove("active");
 			this.moreButtonState = 'inactive';
@@ -96,7 +94,7 @@ class App {
 		this.cardNums.unshift(firstCard - 1);
 		this.cardNums.pop();
 
-		if (firstCard === 0) {
+		if (firstCard === 1) {
 			let button = document.getElementById("less");
 			button.classList.remove("active");
 			this.lessButtonState = 'inactive';
@@ -112,8 +110,6 @@ class App {
 		this.bindEvents();
 
 		this.cardsWrapper.html = this.renderCards(this.data);
-
-		console.log(this.data[0][name]);
 	}
 
 }
