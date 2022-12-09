@@ -57,6 +57,7 @@ html, body {
 
 .username {
 	color: grey;
+	font-size: 1rem;
 }
 
 .address-container {
