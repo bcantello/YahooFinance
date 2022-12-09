@@ -4,10 +4,11 @@ class App {
 	constructor() {
 		this.data = null;
 		this.cardNums = [0, 1, 2];
-		this.buttons = null;
 		this.lessButton = null;
 		this.moreButton = null;
 		this.cardsWrapper = null;
+		this.moreButtonState = 'active';
+		this.lessButtonState = 'inactive';
 
 		this.fetchData().then(() => {
 			this.intit()
@@ -36,8 +37,10 @@ class App {
 
 	renderCards(data) {
 		console.log(data);
+		console.log(this.cardNums);
 		let cards = this.cardNums;
 		let parentContainer = document.getElementById('content');
+		parentContainer.innerHTML = '';
 
 		if (document.getElementsByClassName('card').length < this.cardNums.length) {
 			for (let i = 0; i < this.cardNums.length; i++) {
@@ -73,19 +76,36 @@ class App {
 	}
 
 	handleClickMore() {
+		this.lessButtonState = 'active';
 		let lastCard = this.cardNums[this.cardNums.length -1];
 		this.cardNums.push(lastCard + 1);
 		this.cardNums.shift();
+
+		if (lastCard === this.data.length - 1) {
+			let button = document.getElementById("more");
+			button.classList.remove("active");
+			this.moreButtonState = 'inactive';
+		}
+
+		this.renderCards(this.data);
 	}
 
 	handleClickLess() {
+		this.moreButtonState = 'active';
 		let firstCard = this.cardNums[0];
 		this.cardNums.unshift(firstCard - 1);
 		this.cardNums.pop();
+
+		if (firstCard === 0) {
+			let button = document.getElementById("less");
+			button.classList.remove("active");
+			this.lessButtonState = 'inactive';
+		}
+
+		this.renderCards(this.data);
 	}
 
 	intit() {
-		this.buttons = document.querySelectorAll('.button');
 		this.lessButton = document.getElementById('less');
 		this.moreButton = document.getElementById('more');
 
