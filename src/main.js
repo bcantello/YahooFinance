@@ -51,7 +51,7 @@ class App {
 				<div class="card">
 					<div class="name-container">
 						<div class="name">${data[cards[i]]['name']}</div>
-						<div class="username">${data[cards[i]]['username']}</div>
+						<div class="username">"${data[cards[i]]['username']}"</div>
 					</div>
 					<div class="details-wrapper">
 						<div class="address-container">
@@ -59,7 +59,7 @@ class App {
 							<div class="address">${data[cards[i]]['address']['city']} ${data[cards[i]]['address']['zip']}</div>
 						</div>
 						<div class="contact-container">
-							<div class="contact">${data[cards[i]]['company']['name']}</div>
+							<div class="company">${data[cards[i]]['company']['name']}</div>
 							<div class="contact">${data[cards[i]]['company']['catchPhrase']}</div>
 							<div class="contact">${data[cards[i]]['phone']}</div>
 							<div class="contact">${data[cards[i]]['email']}</div>
